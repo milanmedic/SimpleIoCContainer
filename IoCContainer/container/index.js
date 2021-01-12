@@ -38,11 +38,15 @@ class Container {
 	/**
 	 * 
 	 * @param {string} name 
+	 * @param {string} newName
 	 */
-	getInstance(name) {
+	getInstance(name, newName = "") {
 		if (!this.singletons[name]) {
 			const factory = this.get(name);
 			const manufacturedInstance = new factory();
+			if (newName) {
+				name = newName;
+			}
 			this.singletons[name] = manufacturedInstance;
 		}
 		return this.singletons[name];

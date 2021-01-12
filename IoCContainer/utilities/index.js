@@ -1,5 +1,11 @@
 function inject(container, factory) {
-	const args = parseArguments(factory);
+	let args = parseArguments(factory);
+	if (!args && !factory._injectables) {
+		throw new Error(`No dependencies listed for Factory ${factory}`);
+	}
+	if (!args || args.toString() != factory._injectables.toString()) {
+		args = factory._injectables;
+	}
 	const factoryArguments = args.map(dependency => {
 		return container.get(dependency);
 	});
