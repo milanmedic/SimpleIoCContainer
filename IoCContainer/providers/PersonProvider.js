@@ -1,6 +1,6 @@
-const Factory = require('../../Factory');
-const PersonFactory = require('../../PersonFactory');
-const PersonModel = require('../../Person');
+const Factory = require('../../Factories/BaseFactory');
+const PersonFactory = require('../../Factories/PersonFactory');
+const PersonModel = require('../../Models/PersonModel');
 
 module.exports = container => {
 	container.register('Factory', Factory);
