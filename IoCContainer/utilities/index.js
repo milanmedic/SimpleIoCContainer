@@ -7,7 +7,17 @@ function inject(container, factory) {
 		args = factory._injectables;
 	}
 	const factoryArguments = args.map(dependency => {
-		return container.get(dependency);
+		let instanceRegex = /Instance/;
+		let modelRegex = /Model/;
+		let a = dependency.match(instanceRegex)
+		if (dependency.match(instanceRegex)) {
+			return container.getInstance(dependency.split('Instance')[0]);
+		}
+		else if (dependency.match(modelRegex)) {
+			return container.get(dependency.split('Model')[0]);
+		} else {
+			return container.get(dependency);
+		}
 	});
 	return factory.apply(null, factoryArguments);
 };

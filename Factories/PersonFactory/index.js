@@ -1,7 +1,11 @@
 module.exports = (Factory, Person) => {
+	let entity = Person;
 	class PersonFactory extends Factory {
-		constructor() {
-			super(Person);
+		constructor(subClassEntity) {
+			if (subClassEntity) {
+				entity = subClassEntity
+			}
+			super(entity);
 		}
 		/**
 		 * 
@@ -18,4 +22,4 @@ module.exports = (Factory, Person) => {
 	return PersonFactory;
 }
 
-module.exports._injectables = ['Factory', 'Person'];
+module.exports._injectables = ['Factory', 'Person']; 

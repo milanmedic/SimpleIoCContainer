@@ -21,6 +21,10 @@ class Container {
 	register(name, dependency) {
 		this.dependencies[name] = dependency;
 	}
+
+	registerInstance(name, dependency) {
+		this.singletons[name + 'Instance'] = dependency;
+	}
 	/**
 	 * 
 	 * @param {string} name 
@@ -41,15 +45,15 @@ class Container {
 	 * @param {string} newName
 	 */
 	getInstance(name, newName = "") {
-		if (!this.singletons[name]) {
+		if (!this.singletons[name + 'Instance']) {
 			const factory = this.get(name);
 			const manufacturedInstance = new factory();
 			if (newName) {
 				name = newName;
 			}
-			this.singletons[name] = manufacturedInstance;
+			this.singletons[name + 'Instance'] = manufacturedInstance;
 		}
-		return this.singletons[name];
+		return this.singletons[name + 'Instance'];
 	}
 };
 

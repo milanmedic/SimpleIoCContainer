@@ -3,5 +3,6 @@ const container = require('./container').getContainer({ inject });
 
 module.exports = (() => {
 	require('./providers/PersonProvider')(container);
+	require('./providers/StudentProvider')(container);
 	return container;
 })();
